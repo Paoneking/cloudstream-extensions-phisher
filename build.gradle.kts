@@ -34,7 +34,7 @@ subprojects {
 
     cloudstream {
         // compatible with other git hosting services, like gitlab, gitDab, codeBerg
-        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "https://github.com/phisher98/Phisher98")
+        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "https://github.com/Paoneking/cloudstream-extensions-phisher")
     }
 
     android {
