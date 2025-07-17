@@ -1,5 +1,6 @@
 package com.paoneking
 
+import com.lagradost.api.Log
 import com.lagradost.cloudstream3.ErrorLoadingException
 import com.lagradost.cloudstream3.HomePageResponse
 import com.lagradost.cloudstream3.MainAPI
@@ -32,19 +33,23 @@ class VeexProvider : MainAPI() { // all providers must be an instance of MainAPI
         val res = app.get(request.data).parsedSafe<List<MovieItem>>()
         val searchResponses: List<SearchResponse> = res?.map { it.toSearchResponse() }
             ?: throw ErrorLoadingException("Invalid JSON response")
-        return newHomePageResponse(
+        val homePage =  newHomePageResponse(
             request.name, searchResponses
         )
+        Log.d("veex", "homePage: $homePage")
+        return homePage
     }
 
     private fun MovieItem.toSearchResponse(): SearchResponse {
-        return newMovieSearchResponse(
+        val movieSearchResponse = newMovieSearchResponse(
             title,
             id.toString(),
             TvType.Movie
         ) {
             this.posterUrl = cover
         }
+        Log.d("veex", "movieSearchResponse: $movieSearchResponse")
+        return movieSearchResponse
     }
 
     companion object {

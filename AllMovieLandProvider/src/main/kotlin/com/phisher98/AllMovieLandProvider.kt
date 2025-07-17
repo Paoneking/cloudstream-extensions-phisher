@@ -99,7 +99,9 @@ class AllMovieLandProvider : MainAPI() { // all providers must be an instance of
         val home = document.select("article.short-mid").mapNotNull {
                     it.toHomeSearchResult()
                 }
-        return newHomePageResponse(arrayListOf(HomePageList(request.name, home)), hasNext = true)
+        val homePage = newHomePageResponse(arrayListOf(HomePageList(request.name, home)), hasNext = true)
+        Log.d("AllMovie", "homePage: $homePage")
+        return homePage
     }
 
     private fun Element.toSearchResult(): SearchResponse? {
