@@ -308,7 +308,9 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             .parsedSafe<Results>()?.results?.mapNotNull { media ->
                 media.toSearchResponse(type)
             } ?: throw ErrorLoadingException("Invalid Json reponse")
-        return newHomePageResponse(request.name, home)
+        val homePage = newHomePageResponse(request.name, home)
+        Log.d("StreamPlay", "homePage: $homePage")
+        return homePage
     }
 
     private fun Media.toSearchResponse(type: String? = null): SearchResponse? {
