@@ -1,5 +1,6 @@
 package com.paoneking
 
+import com.lagradost.api.Log
 import com.lagradost.cloudstream3.ErrorLoadingException
 import com.lagradost.cloudstream3.HomePageList
 import com.lagradost.cloudstream3.HomePageResponse
@@ -15,7 +16,7 @@ import com.lagradost.cloudstream3.newMovieSearchResponse
 class VeexProvider : MainAPI() { // all providers must be an instance of MainAPI
     override var name = "Veex Netflix"
     override val hasMainPage = true
-    override var lang = "np"
+    override var lang = "ne"
     override val hasDownloadSupport = true
     override val supportedTypes = setOf(
         TvType.Movie,
@@ -29,7 +30,12 @@ class VeexProvider : MainAPI() { // all providers must be an instance of MainAPI
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val res = app.get(request.data).parsedSafe<List<MovieItem>>()
+        Log.d("veex", "request: $request, page: $page")
+        val response = app.get(request.data)
+        val stringRes = response.text
+        Log.d("veex", "resposetxt: $stringRes")
+        val res = response.parsedSafe<List<MovieItem>>()
+        Log.d("veex", "response: $res")
         val searchResponses: List<SearchResponse> = res?.map { it.toSearchResponse() }
             ?: throw ErrorLoadingException("Invalid JSON response")
         return newHomePageResponse(

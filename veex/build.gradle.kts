@@ -6,7 +6,7 @@ cloudstream {
     // All of these properties are optional, you can safely remove them
 
     description = "Veex Provider"
-    language = "np"
+    language = "ne"
     authors = listOf("Paoneking")
 
     /**

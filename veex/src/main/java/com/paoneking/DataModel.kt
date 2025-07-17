@@ -6,6 +6,7 @@ import com.lagradost.cloudstream3.TvType
 import com.lagradost.cloudstream3.newMovieSearchResponse
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 
+
 data class MovieItem(
     val id: Int,
     val type: String,
