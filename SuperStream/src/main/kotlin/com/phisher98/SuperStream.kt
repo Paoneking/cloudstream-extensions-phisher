@@ -192,7 +192,7 @@ open class SuperStream(sharedPref: SharedPreferences? = null) : TmdbProvider() {
 
             val document = Jsoup.parse(htmlResponse?.html.orEmpty())
             val parsedHtmlContent = document.select("div.list_scroll > div > div")
-            val filesFromHtml = parsedHtmlContent.mapNotNull { div ->
+            val filesFromHtml: List<SearchResponse> = parsedHtmlContent.mapNotNull { div ->
                 div.toSearchResponse()
              }
 
